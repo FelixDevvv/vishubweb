@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary-color: #00FBFF;
             --secondary-color: #004e50;
             --bg-dark: #0a0a0a;
             --card-bg: rgba(255, 255, 255, 0.05);
+            --discord-color: #5865F2;
+            --youtube-color: #FF0000;
+            --store-color: #f1c40f;
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--bg-dark);
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
         }
 
-        /* --- BURBUJAS OPTIMIZADAS (Smooth) --- */
+        /* --- BURBUJAS --- */
         #ocean-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -43,7 +47,7 @@
             100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
         }
 
-        /* --- SECCIÓN HERO --- */
+        /* --- SECCIÓN HERO Y ANIMACIÓN DEL LOGO --- */
         .hero {
             height: 70vh;
             display: flex;
@@ -55,9 +59,17 @@
         }
 
         .hero img {
-            width: 300px; /* Tu logo del ancla */
+            width: 300px;
             filter: drop-shadow(0 0 20px var(--primary-color));
             margin-bottom: 20px;
+            /* Aplicamos la animación de flotar */
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
 
         .hero h1 {
@@ -67,7 +79,7 @@
             text-shadow: 4px 4px 0px rgba(0,0,0,0.5);
         }
 
-        /* --- BOTONES ESTILO NAUTIC --- */
+        /* --- BOTONES CON ICONOS REALES --- */
         .nav-container {
             display: flex;
             gap: 15px;
@@ -78,7 +90,7 @@
 
         .btn-nautic {
             width: 140px;
-            height: 160px;
+            height: 140px;
             background: var(--card-bg);
             border: 2px solid var(--primary-color);
             border-radius: 15px;
@@ -90,16 +102,25 @@
             color: white;
             font-weight: bold;
             transition: 0.3s;
-            box-shadow: 0 0 15px rgba(0, 251, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 251, 255, 0.1);
+        }
+
+        .btn-nautic i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
         }
 
         .btn-nautic:hover {
-            background: var(--primary-color);
-            color: black;
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            background: rgba(0, 251, 255, 0.1);
         }
 
-        /* --- SECCIONES (Guía y Anuncios) --- */
+        /* Colores específicos al hacer hover para realismo */
+        .btn-discord:hover { border-color: var(--discord-color); color: var(--discord-color); }
+        .btn-youtube:hover { border-color: var(--youtube-color); color: var(--youtube-color); }
+        .btn-store:hover { border-color: var(--store-color); color: var(--store-color); }
+
+        /* --- SECCIONES --- */
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -135,16 +156,28 @@
     <div id="ocean-bg"></div>
 
     <section class="hero">
-        <img src="https://i.ibb.co/LhSwjMtS/vishubi-network.pngg" alt="Vishubi Logo">
+        <img src="https://i.ibb.co/LhSwjMtS/vishubi-network.png" alt="Vishubi Logo">
         <h1>VISHUBI NETWORK</h1>
         <p>IP: mc.vishubinetwork.qzz.io</p>
     </section>
 
     <div class="nav-container">
-        <a href="https://vishubinw.tebex.io" class="btn-nautic"><span>🛒</span><br>TIENDA</a>
-        <a href="https://discord.gg/AJzR85e5kG" class="btn-nautic"><span>💬</span><br>DISCORD</a>
-        <a href="#guia" class="btn-nautic"><span>📚</span><br>GUÍA</a>
-        <a href="https://youtube.com/@VishubiNetworkOfficial" class="btn-nautic"><span>📽️</span><br>YOUTUBE</a>
+        <a href="https://vishubinw.tebex.io" class="btn-nautic btn-store">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>TIENDA</span>
+        </a>
+        <a href="https://discord.gg/AJzR85e5kG" class="btn-nautic btn-discord">
+            <i class="fa-brands fa-discord"></i>
+            <span>DISCORD</span>
+        </a>
+        <a href="#guia" class="btn-nautic">
+            <i class="fa-solid fa-book"></i>
+            <span>GUÍA</span>
+        </a>
+        <a href="https://youtube.com/@VishubiNetworkOfficial" class="btn-nautic btn-youtube">
+            <i class="fa-brands fa-youtube"></i>
+            <span>YOUTUBE</span>
+        </a>
     </div>
 
     <div class="container">
@@ -168,7 +201,6 @@
     </div>
 
     <script>
-        // Generador de burbujas dinámico
         const bg = document.getElementById('ocean-bg');
         function createBubble() {
             const b = document.createElement('div');
